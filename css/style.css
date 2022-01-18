@@ -6,16 +6,12 @@ h1 {
   font-size: 2rem;
 }
 
-.container {
-  display: grid;
-
-}
-
-main img {
+main {
   display: grid;
   width: 300px;
   height: 300px;
- 
+  display: grid;
+
 }
 
 main img:hover {
