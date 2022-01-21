@@ -46,7 +46,7 @@ img:hover {
   padding: 3rem;
 }
 
-section + div {
+/* section + div {
   grid-column-start: 2;
   grid-row-start: 4;
   background-color: black;
@@ -66,5 +66,5 @@ section + div.clicks-allowed {
 }
 section + div.clicks-allowed:hover {
   background-color: turquoise;
-}
+} */
 
