@@ -3,6 +3,7 @@
 let imgArray =[];
 let counter = 0;
 let counterMaxValue = 25;
+let indexArray = [];
 
 const myContainer = document.querySelector('section');
 const myButton = document.querySelector('section + div');
@@ -24,13 +25,20 @@ function selectRandomImg() {
 }
 
 function renderImages() {
-  let product1 = selectRandomImg();
-  let product2 = selectRandomImg();
-  let product3 = selectRandomImg();
-  while(product1 === product2) {
-    product2 = selectRandomImg();
+  // let product1 = selectRandomImg();
+  // let product2 = selectRandomImg();
+  // let product3 = selectRandomImg();
+  while (indexArray.length < 6) {
+    let randomIndex = selectRandomImg();
+    if (!indexArray.includes(randomIndex)) {
+      indexArray.push(randomIndex);
+    }
   }
-  console.log(image1);
+
+  let product1 = indexArray.shift();
+  let product2 = indexArray.shift();
+  let product3 = indexArray.shift();
+
   image1.src = imgArray[product1].src;
   image1.alt = imgArray[product1].name;
   image2.src = imgArray[product2].src;
@@ -54,27 +62,54 @@ function handleClick(event) {
       break;
     }
   }
+
+  // RENDER THE CHART TO THE DOM
   if (counter === counterMaxValue) {
     myContainer.removeEventListener('click', handleClick);
-    myButton.className = 'clicks-allowed';
-    myButton.addEventListener('click', handleButtonClick);
-  }
-  renderImages();
-}
-function handleButtonClick() {
-  if(counter === counterMaxValue) {
-    renderResults();
+    renderChart();
+  } else {
+    renderImages();
   }
 }
-function renderResults() {
-  let ul = document.querySelector('ul');
-  for (let i =0; i< imgArray.length; i++) {
-    let message = `${imgArray[i].name} had ${imgArray[i].views} views & it was clicked on ${imgArray[i].likes} times`;
-    let li = document.createElement('li');
-    li.textContent = message;
-    ul.appendChild(li);
+function renderChart(){
+  let imgNames =[];
+  let imgLikes =[];
+  let imgViews =[];
+  for (let i = 0; i <imgArray.length; i++) {
+    imgNames.push(imgArray[i].name);
+    imgLikes.push(imgArray[i].likes);
+    imgViews.push(imgArray[i].views);
   }
+
+  const data = {
+    labels: imgNames,
+    datasets: [{
+      label: 'Number of Views',
+      data: imgViews,
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+      ],
+      borderColor: [
+        'rgb(255, 99, 132)',
+      ],
+      borderWidth: 1
+    }]
+  };
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    },
+  };
+  const chart = document.getElementById('myCanvas');
+  const myChart = new Chart(chart,config);
 }
+
 new Product('bag');
 new Product('banana');
 new Product('bathroom');
