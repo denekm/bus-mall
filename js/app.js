@@ -87,10 +87,10 @@ function renderChart(){
       label: 'Number of Views',
       data: imgViews,
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
       ],
       borderColor: [
-        'rgb(255, 99, 132)',
+        'rgb(201, 203, 207)'
       ],
       borderWidth: 1
     }]
