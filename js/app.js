@@ -19,10 +19,16 @@ function Product(name, fileExtension = 'jpeg') {
   this.src =`img/${name}.${fileExtension}`;
   imgArray.push(this);
 }
+//Local Storage
+function storeProduct() {
+  let stringifiedImages = JSON.stringify(imgArray);
+  localStorage.setItem('images',stringifiedImages);
+}
 
 function selectRandomImg() {
   return Math.floor(Math.random() * imgArray.length);
 }
+storeProduct();
 
 function renderImages() {
   // let product1 = selectRandomImg();
