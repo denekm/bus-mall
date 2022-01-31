@@ -6,7 +6,7 @@ let counterMaxValue = 25;
 let indexArray = [];
 
 const myContainer = document.querySelector('section');
-const myButton = document.querySelector('section + div');
+
 
 let image1 = document.querySelector('section img:first-child');
 let image2 = document.querySelector('section img:nth-child(2)');
@@ -28,7 +28,9 @@ function storeProduct() {
 function selectRandomImg() {
   return Math.floor(Math.random() * imgArray.length);
 }
-storeProduct();
+
+
+
 
 function renderImages() {
   // let product1 = selectRandomImg();
@@ -38,8 +40,15 @@ function renderImages() {
     let randomIndex = selectRandomImg();
     if (!indexArray.includes(randomIndex)) {
       indexArray.push(randomIndex);
+      // let parsedImages =JSON.parse('products');
+      // for (let product of parsedImages){
+      //   let likes = product.likes;
+      //   let views = product.views;
+      //   let name = product.name;
+      //   renderImages(likes, views, name);
     }
   }
+  //}
 
   let product1 = indexArray.shift();
   let product2 = indexArray.shift();
@@ -137,5 +146,6 @@ new Product('wine-glass');
 
 
 renderImages();
+storeProduct();
 
 myContainer.addEventListener('click', handleClick);
